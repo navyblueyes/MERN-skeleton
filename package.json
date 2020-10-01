@@ -1,8 +1,8 @@
 {
   "name": "mern-simplesetup",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "A quick check for your MERN stack installation",
-  "author": "Shama Hoque",
+  "author": "Mike Minkoff",
   "license": "MIT",
   "keywords": [
     "react",
@@ -13,9 +13,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/shamahoque/mern-simplesetup.git"
+    "url": "https://github.com/navyblueyes/MERN-skeleton.git"
   },
-  "homepage": "https://github.com/shamahoque/mern-simplesetup",
+  "homepage": "https://github.com/navyblueyes/MERN-skeleton",
   "main": "template.js",
   "scripts": {
     "development": "nodemon",
@@ -28,8 +28,14 @@
   },
   "dependencies": {
     "@hot-loader/react-dom": "16.13.0",
-    "express": "4.17.1",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^4.1.1",
     "mongodb": "3.5.5",
+    "mongoose": "^5.10.7",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-hot-loader": "4.12.20"

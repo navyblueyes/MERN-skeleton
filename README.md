@@ -16,3 +16,9 @@
    - To run the application for development, run ```  yarn development  ```
 4. Open [localhost:3000](http://localhost:3000/) in the browser
  
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M master
+git remote add origin https://github.com/navyblueyes/MERN-skeleton.git
+git push -u origin master
