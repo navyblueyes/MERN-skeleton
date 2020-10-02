@@ -4,7 +4,8 @@ import cookieParser from 'cookie-parser'
 import compress from 'compression'
 import cors from 'cors'
 import helmet from 'helmet'
-
+import Template from './../template'
+import userRoutes from './routes/user.routes'
 
 const app = express()
     // TODO configure express
@@ -21,4 +22,10 @@ const app = express()
     // 5. establish `cors` for enabling sharing from trusted sites
     app.use(cors())
 
+    app.get('/', (req, res) => {
+        res.status(200).sendStatus(Template())
+    })
+
+    app.use('/', userRoutes)
+    
 export default app
