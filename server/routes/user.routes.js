@@ -4,7 +4,7 @@ import userCtrl from '../controllers/user.controller'
 
 const router = express.Router()
 
-/* 
+/*
     User route setup
         /api/users
             GET list of users
