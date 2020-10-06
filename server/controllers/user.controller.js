@@ -20,7 +20,7 @@ const create = async (req, res) => {
             error: errorHandler.getErrorMessage(err)
         })
     }
- }
+}
 
  // List controller
  //    finds all users

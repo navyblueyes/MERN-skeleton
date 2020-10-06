@@ -11,8 +11,7 @@ import devBundle from './devBundle'
 devBundle.compile(app)
 //^ comment out before building for production
 
-
-// variables/defintitions
+// variables/definitions
 const CURRENT_WORKING_DIR = process.cwd()
 mongoose.Promise = global.Promise
 
@@ -25,11 +24,11 @@ app.get('/', (req, res) => {
   res.status(200).send(template())
 })
 
-app.listen(config.port, function onStart(err) {
+app.listen(config.port, (err) => {
   if (err) {
     console.log(err)
   }
-  console.info('Server started on port %s.', port)
+  console.info('Server started on port %s.', config.port)
 })
 
 
@@ -38,4 +37,12 @@ app.listen(config.port, function onStart(err) {
 mongoose.connect(config.mongoUri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
 mongoose.connection.on('error', () => {
   throw new Error(`unable to connect to database: ${mongoUri}`)
+})
+
+
+//
+const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/mernSimpleSetup'
+MongoClient.connect(url, (err, db)=>{
+  console.log("Connected successfully to mongodb server")
+  db.close()
 })
