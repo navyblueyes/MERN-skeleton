@@ -16,7 +16,7 @@
     "url": "https://github.com/navyblueyes/MERN-skeleton.git"
   },
   "homepage": "https://github.com/navyblueyes/MERN-skeleton",
-  "main": "template.js",
+  "main": "./dist/server.generated.js",
   "scripts": {
     "development": "nodemon",
     "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
@@ -47,6 +47,7 @@
     "@babel/preset-env": "7.9.0",
     "@babel/preset-react": "7.9.4",
     "babel-loader": "8.1.0",
+    "file-loader": "^6.1.0",
     "nodemon": "2.0.2",
     "webpack": "4.42.1",
     "webpack-cli": "3.3.11",

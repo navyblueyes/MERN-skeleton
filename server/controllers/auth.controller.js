@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import expressJwt from 'express-jwt'
 import config from './../../config/config'
 
-const signin = (req, res) => {
+const signin = async (req, res) => {
   try {
     // pull email from req and send database a request for email
     let user = await User.findOne({ "email": req.body.email})

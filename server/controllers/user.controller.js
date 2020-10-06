@@ -1,6 +1,6 @@
 import User from '../models/user.model'
 import extend from 'lodash/extend'
-import errorHandler from './error.controller'
+import errorHandler from './../helpers/dbErrorHandler'
 
 /*
     defines the callbacks utilized in the user route declarations
@@ -8,7 +8,7 @@ import errorHandler from './error.controller'
 */
 
 // for the router.route('/api/users').post(userCtrl.create)
-const create = async (res, res) => {
+const create = async (req, res) => {
     const user = new User(req.body)
     try {
         await user.save()
@@ -25,7 +25,7 @@ const create = async (res, res) => {
  // List controller
  //    finds all users
  //    populates a list with `name` `email` `created` `updated` fields
-const list = (res, res) => {
+const list = async (req, res) => {
     try {
         let users = await User.find().select('name email updated created')
         res.json(users)
@@ -46,7 +46,7 @@ const list = (res, res) => {
 //          1. fetch / load user
 //          2. call .next to perform next API call
 
-const userByID = (res, res, next, id) => {
+const userByID = async (req, res, next, id) => {
     try {
         let user = await User.findById(id)
         if (!user)
@@ -64,7 +64,7 @@ const userByID = (res, res, next, id) => {
 }
 
 // no need for `id`... the id is within `res.profile`
-const read = (res, res) => {
+const read = (req, res) => {
     // need to remove `hashed_password` and `salt` for privacy concerns
     req.profile.hashed_password = undefined
     req.profile.salt = undefined
@@ -94,7 +94,7 @@ const update = async (req, res) => {
     }
 }
 
-const remove = async (res, res) => {
+const remove = async (req, res) => {
     try {
         let user = req.profile
         let deletedUser = await user.remove()
