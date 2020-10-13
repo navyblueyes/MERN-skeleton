@@ -10,6 +10,8 @@
 import { signout } from './api-auth.js'
 
 const auth = {
+  //isAuthenticated() method -- retrieve credentials from `sessionStorage`
+  //    returns with JWT ... or false
   isAuthenticated() {
     if (typeof window == "undefined")
       return false
@@ -19,11 +21,15 @@ const auth = {
     else
       return false
   },
+  //authenticate() method -- stores jwt `in sessionStorage`
+  //    acts as a Wrapper... merely pass in function... function runs as cb
   authenticate(jwt, cb) {
     if (typeof window !== "undefined")
       sessionStorage.setItem('jwt', JSON.stringify(jwt))
     cb()
   },
+  // clearJWT() -- removes JWT from sessionStorage
+  //    acts as a Wrapper... merely pass in function... function runs as cb
   clearJWT(cb) {
     if (typeof window !== "undefined")
       sessionStorage.removeItem('jwt')
