@@ -69,6 +69,21 @@ export default function Signup() {
           onClick={clickSubmit} className={classes.submit}>Submit</Button>
         </CardActions>
       </Card>
+      <Dialog open={values.open} disableBackdropClick={true}>
+      <DialogTitle>New Account</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          New account successfully created.
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Link to="/signin">
+          <Button color="primary" autoFocus="autoFocus" variant="contained">
+            Sign In
+          </Button>
+        </Link>
+      </DialogActions>
+    </Dialog>
     </div>
     )
 }
