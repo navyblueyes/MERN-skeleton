@@ -1,0 +1,80 @@
+// Different from EditProfile... will just be ...
+//     a Dialog component w/ cancel button and confirm button
+
+// Receives props from parent component;
+//     Delete is ONLY avail from Profile comp; therefore, userId is in props
+
+// Need a handler methods to open/close dialog button --> handleRequestClose()
+
+import React, {useState} from 'react'
+import PropTypes from 'prop-types'
+import IconButton from '@material-ui/core/IconButton'
+import Button from '@material-ui/core/Button'
+import DeleteIcon from '@material-ui/icons/Delete'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import auth from './../auth/auth-helper'
+import {remove} from './api-user.js'
+import {Redirect} from 'react-router-dom'
+
+export default function DeleteUser(props) {
+  const [open, setOpen] = useState(false)
+  const [redirect, setRedirect] = useState(false)
+
+  const jwt = auth.isAuthenticated()
+  const clickButton = () => {
+    setOpen(true)
+  }
+
+  const handleRequestClose = () => {
+    setOpen(false)
+  }
+
+  const deleteAccount = () => {
+    const jwt = auth.isAuthenticated()
+    remove({
+      userId: props.userId
+    }, {t: jwt.token}).then((data) => {
+      if (date && data.error) {
+        console.log(data.error)
+      } else {
+        auth.clearJW(() => console.log('deleted'))
+        setRedirect(true)
+      }
+    })
+  }
+
+  if(redirect) {
+    return <Redirect to='/'/>
+  }
+
+  return ( <span>
+      <IconButton aria-label="Delete"
+        onClick={clickButton} color="secondary">
+        <DeleteIcon/>
+      </IconButton>
+
+      <Dialog open={open} onClose={handleRequestClose}>
+        <DialogTitle>{"Delete Account"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Confirm to delete your account.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleRequestClose} color="primary"> Cancel
+          </Button>
+          <Button onClick={deleteAccount}
+            color="secondary" autoFocus="autoFocus"> Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </span>)
+}
+
+DeleteUser.propTypes = {
+  userId: PropTypes.string.isRequired
+}
