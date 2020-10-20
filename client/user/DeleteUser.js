@@ -34,7 +34,6 @@ export default function DeleteUser(props) {
   }
 
   const deleteAccount = () => {
-    const jwt = auth.isAuthenticated()
     remove({
       userId: props.userId
     }, {t: jwt.token}).then((data) => {
@@ -74,7 +73,6 @@ export default function DeleteUser(props) {
       </Dialog>
     </span>)
 }
-
 DeleteUser.propTypes = {
   userId: PropTypes.string.isRequired
 }
