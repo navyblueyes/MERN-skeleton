@@ -42,6 +42,11 @@ const app = express()
         }
     })
 
+    //server-side rendering
+    app.get('*', (req, res) => {
+
+    })
+
     devBundle.compile(app)
 
     const CURRENT_WORKING_DIR = process.cwd()
