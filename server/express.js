@@ -1,10 +1,3 @@
-import React from 'react'
-import ReactDOMServer from 'react-dom/server'
-import StaticRouter from 'react-router-dom/StaticRouter'
-import MainRouter from './../client/MainRouter'
-import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles'
-import theme from './../client/theme'
-
 import express from 'express'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
@@ -16,6 +9,16 @@ import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
 import devBundle from './devBundle'
 import path from 'path'
+
+
+// basic server-side rendering, need React, React Router, and Material-UI
+import React from 'react'
+import ReactDOMServer from 'react-dom/server'
+import StaticRouter from 'react-router-dom/StaticRouter'
+import MainRouter from './../client/MainRouter'
+import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles'
+import theme from './../client/theme'
+
 
 const app = express()
     // steps for express
@@ -49,9 +52,19 @@ const app = express()
         }
     })
 
-    //server-side rendering
+    //server-side rendering... notice that it is executed on EVERY GET [.get('*')] request
     app.get('*', (req, res) => {
-
+        const sheets = new ServerStyleSheets()
+        const context = {}
+        const markup = ReactDOMServer.renderToString(
+            sheets.collect(
+                <StaticRouter location={req.url} context= {context}>
+                    <ThemeProvider theme={theme}>
+                        <MainRouter />
+                    </ThemeProvider>
+                </StaticRouter>
+            )
+        )
     })
 
     devBundle.compile(app)
