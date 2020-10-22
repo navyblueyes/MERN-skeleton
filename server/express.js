@@ -1,3 +1,10 @@
+import React from 'react'
+import ReactDOMServer from 'react-dom/server'
+import StaticRouter from 'react-router-dom/StaticRouter'
+import MainRouter from './../client/MainRouter'
+import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles'
+import theme from './../client/theme'
+
 import express from 'express'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
