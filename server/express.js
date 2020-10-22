@@ -22,7 +22,7 @@ import theme from './../client/theme'
 
 const app = express()
     // steps for express
-    // 1. establisht `body-parser` for parding request objects
+    // 1. establish `body-parser` for parding request objects
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({extended: true}))
     // 2. establish `cookie-parser` for parsing cookies within request objects
@@ -52,7 +52,16 @@ const app = express()
         }
     })
 
-    //server-side rendering... notice that it is executed on EVERY GET [.get('*')] request
+    //server-side rendering [SSR]... notice that it is executed on EVERY GET [.get('*')] request
+
+    {/* ServerStyleSheets is Material-UI comp for wrapping css+React for SSR;
+                collect puts CSS into one sheer
+        StaticRouter used in server-side rendering when user isn’t clicking around
+            so the location never actually changes
+            Docu 'location' - URL the server received, probably req.url on a node server.
+            Docu 'context' -- plain JS object for components to add properties during render
+        ThemeProvider holds the CSS;   MainRouter holds all the React Components
+    */}
     app.get('*', (req, res) => {
         const sheets = new ServerStyleSheets()
         const context = {}
