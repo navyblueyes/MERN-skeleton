@@ -1,3 +1,5 @@
+// client/user/Profile.js
+
 // Profile component [ProCo] shows single user's info
 // user's id is drawn from the url '/user/:userid' path
 // ProCo will conditionally show edit/delete options
@@ -77,6 +79,7 @@ export default function Profile({ match }) {
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary={user.name} secondary={user.email}/>
+          <ListItemText primary={user.name} secondary={user.email}/>
           { auth.isAuthenticated().user && auth.isAuthenticated().user._id == user.id &&
             (<ListItemSecondaryAction>
               <Link to={"/user/edit/" + user._id}>
@@ -90,7 +93,7 @@ export default function Profile({ match }) {
         </ListItem>
         <Divider/>
         <ListItem>
-          <ListItemText primary={"Joined: " + ( new Date(user.created)).toDateString()}/>
+          <ListItemText primary={values.user.about} secondary={"Joined: " + ( new Date(user.created)).toDateString()}/>
         </ListItem>
       </List>
     </Paper>
