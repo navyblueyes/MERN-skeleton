@@ -1,14 +1,16 @@
+// server/models/user.model.js
+
 import mongoose from 'mongoose'
 
 
 // Define base UserSchema
-const UserSchema = new mongoose.Schema({ 
+const UserSchema = new mongoose.Schema({
     // defining schema consisting of ...
-    //    name 
-    //    email 
-    //    created-at timestamp 
+    //    name
+    //    email
+    //    created-at timestamp
     //    last-updated-at timestamp
-    //    hashed password 
+    //    hashed password
     //    password salt
 
     name: {
@@ -23,6 +25,11 @@ const UserSchema = new mongoose.Schema({
         unique: 'Email already exists',
         match: [/.+\@+\..+/, 'Please fill a valid email address'],
         required: 'Email is required'
+    },
+
+    about: {
+        type: String,
+        trim: true
     },
 
     created: {
@@ -64,7 +71,7 @@ UserSchema.methods = {
     },
     makeSalt: function() {
         // generate salt with Math random
-        return Math.round((new Date().valueOf() * Math.random())) + '' 
+        return Math.round((new Date().valueOf() * Math.random())) + ''
     }
 }
 
