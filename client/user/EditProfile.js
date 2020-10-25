@@ -116,6 +116,17 @@ export default function EditProfilt({ match }) {
         <Typography variant="h6" className={classes.title}>
           Edit Profile
         </Typography>
+        <input accept="image/*" type="file" onChange={handleChange('photo')}
+          style={{display:'none'}}
+          id="icon-button-file"  />
+        <label htmlFor="icon-button-file">
+          <Button variant="contained" color="default" component="span">
+            Upload
+            <FileUpload/>
+          </Button>
+        </label>
+        <span className={classes.filename}>{values.photo ? values.photo.name : ''}</span>
+        <br/>
         <TextField id="name" label="Name" className={classes.textField}
           value={values.name}
           onChange={handleChange('name')}

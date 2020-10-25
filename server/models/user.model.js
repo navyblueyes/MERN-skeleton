@@ -44,6 +44,11 @@ const UserSchema = new mongoose.Schema({
         required: "Password is required"
     },
 
+    photo: {
+        data: Buffer,
+        contentType: String
+    }
+
     salt: String
 })
 
