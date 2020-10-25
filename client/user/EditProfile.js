@@ -81,20 +81,21 @@ export default function EditProfilt({ match }) {
   }, [match.params.userId])
 
   const clickSubmit = () => {
-    const user = {
-      name: values.name || undefined,
-      email: values.email || undefined,
-      password: values.password || undefined
-    }
+    let userData = new FormData()
+    values.name && userData.append('name', values.name)
+    values.email && userData.append('email', values.email)
+    values.password && userData.append('password', values.password)
+    values.about && userData.append('about', values.about)
+    values.photo && userData.append('photo', values.photo)
     update({
       userId: match.params.userId
     }, {
       t: jwt.token
-    }, user).then((data) => {
+    }, userData).then((data) => {
       if (data && data.error) {
         setValues({...values, error: data.error})
       } else {
-        setValues({...values, userId: data._id, redirectToProfile: true})
+        setValues({...values, 'redirectToProfile': true})
       }
     })
     if (values.redirectToProfile) {
@@ -103,6 +104,9 @@ export default function EditProfilt({ match }) {
   }
 
   const handleChange = name => event => {
+    const value = name === 'photo'
+      ? event.target.files[0]
+      : event.target.value
     setValues({...values, [name]: event.target.value})
   }
 

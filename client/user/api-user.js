@@ -39,7 +39,6 @@ const read = async (params, credentials, signal) => {
   try {
     let response = await fetch('/api/users/' + params.userId, {
       method: 'GET',
-      signal: signal,
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -57,17 +56,17 @@ const read = async (params, credentials, signal) => {
 // U - update -- changing a single user data with PUT method
 // specific user -- need params in URL
 // changing user details -- need security in header
-const read = async (params, credentials, user) => {
+const update = async (params, credentials, user) => {
   try {
     let response = await fetch('/api/users/' + params.userId, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + credentials.t
         // NOTE= Bearer scheme for JWT
+        // removed content-type because server is no longer app/json
       },
-      body: JSON.stringify(user)
+      body: user
     })
     return await response.json()
   } catch(err) {
