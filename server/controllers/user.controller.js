@@ -84,23 +84,23 @@ const update = (req, res) => {
                     // ^ formidable reads multipart form data...
     form.keepExtensions = true
     form.parse(req, async (err, fields, files) => {
-      if (err) {
+    if (err) {
         return res.status(400).json({
-          error: "Photo could not be uploaded"
+            error: "Photo could not be uploaded"
         })
-      }
-      let user = req.profile
-      user = extend(user, fields)
-            // ^ extend is a lodash object function that allows you to ...
+    }
+    let user = req.profile
+    user = extend(user, fields)
+            //^ extend is a lodash object function that allows you to ...
             //     replace `user` properties with that is different in `req.body
             //     reference: https://tinyurl.com/y3mszo63
-      user.updated = Date.now()
-      if(files.photo){
+    user.updated = Date.now()
+    if(files.photo){
         user.photo.data = fs.readFileSync(files.photo.path)
                         // store formidable into fs
         user.photo.contentType = files.photo.type
-      }
-      try {
+    }
+    try {
         await user.save()
         user.hashed_password = undefined
         user.salt = undefined
@@ -109,11 +109,11 @@ const update = (req, res) => {
         // wrap up changes into res object with res.json
     } catch (err) {
         return res.status(400).json({
-          error: errorHandler.getErrorMessage(err)
+            error: errorHandler.getErrorMessage(err)
         })
-      }
+    }
     })
-  }
+}
 
 
 

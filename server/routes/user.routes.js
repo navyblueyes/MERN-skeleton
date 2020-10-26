@@ -24,6 +24,11 @@ router.route('/api/users/:userId')
     .put(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.update)
     .delete(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.remove)
 
+router.rout('/api/users/photo/:userId')
+    .get(userCtrl.photo, userCtrl.defaultPhoto)
+router.rout('/api/users/defaultphoto')
+    .get(userCtrl.defaultPhoto)
+
 // need to call function `userById` with all routes with `userId` parameter
 router.param('userId', userCtrl.userByID)
 
