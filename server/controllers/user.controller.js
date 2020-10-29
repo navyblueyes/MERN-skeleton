@@ -10,6 +10,8 @@ import User from '../models/user.model'
 import extend from 'lodash/extend'
 import errorHandler from './../helpers/dbErrorHandler'
 
+import profileImage from './../../client/assets/images/profile-pic.png'
+
 /*
     defines the callbacks utilized in the user route declarations
 
@@ -131,5 +133,20 @@ const remove = async (req, res) => {
         })
     }
 }
+
+
+// Social media addon -- photo, defaultPhoto
+const photo = (req, res, next) => {
+    if(req.profile.photo.data){
+        res.set("Content-Type", req.profile.photo.contentType)
+        return res.sent(req.profile.photo.data)
+    }
+    next()
+}
+
+const defaultPhoto = (req, res) => {
+    return res.sendFile(process.cwd()+profileImage)
+}
+
 
 export default { create, userByID, read, list, remove, update}

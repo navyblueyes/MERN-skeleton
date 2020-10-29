@@ -38,6 +38,12 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+//photoUrl sets up route to retrieve photo based on user ID
+// NOTE-- date operation adds a time value to URL to FORCE a rerender
+const photoUrl = values.user._id
+  ? `/api/users/photo/${values.user._id}?${new Date().getTime()}`
+  : '/api/users/defaultphoto'
+
 export default function Profile({ match }) {
   const [user, setUser] = useState({})
   const [redirectToSignin, setRedirectToSignin] = useState(false)
@@ -74,9 +80,7 @@ export default function Profile({ match }) {
       <Typography variant="h6" className={classes.title}> Profile </Typography> <List dense>
         <ListItem>
           <ListItemAvatar>
-            <Avatar>
-              <Person/>
-            </Avatar>
+            <Avatar src={photoUrl} className={classes.bigAvatar}/>
           </ListItemAvatar>
           <ListItemText primary={user.name} secondary={user.email}/>
           { auth.isAuthenticated().user && auth.isAuthenticated().user._id == user.id &&
