@@ -24,10 +24,22 @@ router.route('/api/users/:userId')
     .put(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.update)
     .delete(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.remove)
 
+// add photo URL
 router.rout('/api/users/photo/:userId')
     .get(userCtrl.photo, userCtrl.defaultPhoto)
 router.rout('/api/users/defaultphoto')
     .get(userCtrl.defaultPhoto)
+
+// Follow + UnFollow Routes
+router.route('/api/users/follow')
+    .put(authCtrl.requireSignin,
+        userCtrl.addFollowing,
+        userCtrl.addFollower)
+
+router.route('/api/users/unfollow')
+    .put(authCtrl.requireSignin,
+        userCtrl.removeFollowing,
+        userCtrl.removeFollower)
 
 // need to call function `userById` with all routes with `userId` parameter
 router.param('userId', userCtrl.userByID)
