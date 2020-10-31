@@ -1,3 +1,8 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+import Button from '@material-ui/core/Button'
+import {unfollow, follow} from './api-user.js'
+
 export default function FollowProfileButton (props) {
   const followClick = () => { props.onButtonClick(follow) }
   const unfollowClick = () => { props.onButtonClick(unfollow) }
