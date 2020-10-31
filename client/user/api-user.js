@@ -95,6 +95,42 @@ const remove = async (params, credentials) => {
   }
 }
 
+// Social Media User API -- Follow / UnFollow
+
+
+const follow = async (params, credentials, followId) => {
+  try {
+    let response = await fetch('/api/users/follow/', {
+      method: 'PUT', headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + credentials.t
+      }, body: JSON.stringify({userId:params.userId, followId: followId})
+    })
+    return await response.json()
+  } catch(err) {
+    console.log(err)
+  }
+}
+
+const unfollow = async (params, credentials, unfollowId) => {
+  try {
+    let response = await fetch('/api/users/unfollow/', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + credentials.t
+      }, body: JSON.stringify({
+        userId:params.userId,
+        unfollowId:unfollowId
+      })
+    })
+    return await response.json()
+  } catch(err) {
+    console.log(err)
+  }
+}
 
 // export CRUD methods
-export { create, list, read, update, remove }
+export { create, list, read, update, remove, follow }
