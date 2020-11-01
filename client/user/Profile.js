@@ -24,6 +24,9 @@ import DeleteUser from './DeleteUser'
 import auth from './../auth/auth-helper'
 import {read} from './api-user.js'
 import {Redirect, Link} from 'react-router-dom'
+import FollowProfileButton from './../user/FollowProfileButton'
+import ProfileTabs from './../user/ProfileTabs'
+import {listByUser} from './../post/api-post.js'
 
 const useStyles = makeStyles(theme => ({
   root: theme.mixins.gutters({
@@ -35,6 +38,11 @@ const useStyles = makeStyles(theme => ({
   title: {
     marginTop: theme.spacing(3),
     color: theme.palette.protectedTitle
+  }
+  bigAvatar: {
+    width: 60,
+    height: 60,
+    margin: 10
   }
 }))
 
