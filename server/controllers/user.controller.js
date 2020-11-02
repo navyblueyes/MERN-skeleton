@@ -190,5 +190,17 @@ const addFollower = async (req, res) => {
             error: errorHandler.getErrorMessage(err)
         })
     }
+}
 
-export default { create, userByID, read, list, remove, update, photo, defaultPhoto}
+export default {
+    create,
+    userByID,
+    read,
+    list,
+    remove,
+    update,
+    photo,
+    defaultPhoto,
+    addFollower,
+    addFollowing
+}
