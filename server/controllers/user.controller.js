@@ -153,4 +153,22 @@ const defaultPhoto = (req, res) => {
 }
 
 
+//Social Media Follow/Unfollow API
+
+// Note -- any follow / unfollow action MUST AFFECT BOTH USERS!!!!
+
+// First... update user's database object by pushing an update on the 'following' field
+const addFollowing = async (req, res, next) => {
+    try{
+        await User.findByIdAndUpdate(req.body.userId, {
+            $push: {following: req.body.followId}
+        })
+        next()
+    } catch(err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        })
+    }
+}
+
 export default { create, userByID, read, list, remove, update, photo, defaultPhoto}
