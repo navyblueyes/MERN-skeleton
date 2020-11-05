@@ -2,6 +2,12 @@
 
 // For now... using on Profile page
 
+// Goal - accepts users via props
+//      - generate GridList
+//      - map into each list item [GridListTitle -> Link]
+//           -- Avatar
+//           -- Name within <Typography>
+
 import React from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
