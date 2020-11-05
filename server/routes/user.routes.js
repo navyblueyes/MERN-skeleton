@@ -41,6 +41,11 @@ router.route('/api/users/unfollow')
         userCtrl.removeFollowing,
         userCtrl.removeFollower)
 
+// Follow API
+//   1) fetchs lists of users with "not followed" status
+router.route('/api/users/findpeople/:userId')
+    .get(authCtrl.requireSignin, userCtrl.findPeople)
+
 // need to call function `userById` with all routes with `userId` parameter
 router.param('userId', userCtrl.userByID)
 

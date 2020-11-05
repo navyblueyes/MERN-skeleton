@@ -226,6 +226,34 @@ const removeFollower = async (req, res) => {
     }
 }
 
+
+// Social Media -- Find
+// Only need one controllerfunction --> findPeople
+//   Step 1 -- Take in req and create an array of users from the profile.following
+
+//   Step 2 -- Async/Await a .find Mongo on the User Collection
+//                use profile.following array and find all users NOT IN profile.following
+
+
+    // Need to use MongoDB comparison $nin...
+    //    Docs: https://docs.mongodb.com/manual/reference/operator/query/nin/
+    //    will use $nin to select the documents where users _id is not in the "following"
+
+//   Step 3 -- .select 'name' and store within res.json
+
+const findPeople = async (req, res) => {
+    let following = req.profile.following
+    following.push(req.profile._id)
+    try {
+        let users = await User.find({ _id:{ $nin: following }})
+            .select('name')
+        res.json(users)
+    } catch(err) {
+        return res.status(400).json({
+            error:errorHandler.getErrorMessage(err)
+        })
+    }
+}
 export default {
     create,
     userByID,
@@ -238,5 +266,6 @@ export default {
     addFollower,
     addFollowing,
     removeFollowing,
-    removeFollower
+    removeFollower,
+    findPeople
 }
