@@ -48,6 +48,7 @@ app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 // 7. mount auth/user on ALL ROUTES
 app.use('/', authRoutes)
 app.use('/', userRoutes)
+app.use('/', postRoutes)
 
 //server-side rendering [SSR]... notice that it is executed on EVERY GET [.get('*')] request
 
