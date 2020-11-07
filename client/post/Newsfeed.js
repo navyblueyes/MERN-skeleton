@@ -61,6 +61,7 @@ export default function Newsfeed() {
 
   const addPost = (post) => {
     const updatedPosts = [...posts]
+    // .unshift adds `post` to the front of array; .push for back of array
     updatedPosts.unshift(post)
     setPosts(updatedPosts)
   }
