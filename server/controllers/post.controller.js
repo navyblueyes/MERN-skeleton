@@ -31,6 +31,6 @@ const listByUser = async (req, res) => {
 
 
 export default {
-  listNewsFeed
+  listNewsFeed,
   listByUser
 }
