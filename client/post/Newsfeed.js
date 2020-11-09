@@ -43,7 +43,6 @@ export default function Newsfeed() {
     const abortController = new AbortController()
     const signal = abortController.signal
 
-    // TODO create listNewsFeed in api-post.js
     listNewsFeed({userId: jwt.user._id}, {t: jwt.token}, signal)
     .then((data) => {
       if (data.error) {
